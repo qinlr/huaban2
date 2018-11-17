@@ -6,6 +6,7 @@ import Home from '@/components/Home'
 import New from '../components/pages/New'
 import Hot from '../components/pages/Hot'
 import Find from '../components/pages/Find/Find'
+import Search from '../components/pages/Search/Search'
 Vue.use(Router)
 
 export default new Router({
@@ -25,14 +26,19 @@ export default new Router({
       component: Home
     },
     {
-      path:'/new',
+      path:'/New',
       name:'New',
       component:New
     },
     {
-      path:'/hot',
+      path:'/Hot',
       name:'Hot',
       component:Hot
+    },
+    {
+      path:'/Search',
+      name:'Search',
+      component:Search
     }
 
   ]

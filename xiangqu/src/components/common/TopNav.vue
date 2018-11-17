@@ -5,18 +5,29 @@
                 <button class="regbtn">注册</button>
                 <button class="loginbtn">登录</button>
             </li>
-            <li v-for="(item,index) in list" :key="index">
-                {{item}} <i class="fa fa-angle-right fr"></i>    
+            <li v-for="(item,index) in list" :key="index" @click="topath(item.pathname,item.name)">
+                {{item.name}} <i class="fa fa-angle-right fr"></i>    
             </li>
         </ul>
     </div>
 </template>
 <script>
+import Vue from 'vue'
 export default {
     name:'TopNav',
     data(){
         return {
-            list:['最新','热门','发现']
+            list:[{name:'最新',pathname:'New'},{name:'热门',pathname:'Hot'},{name:'发现',pathname:'Find'}]
+        }
+    },
+    computed:{
+        navshow(){return this.$store.state.navShow}
+    },
+    methods:{
+        topath(path,name){
+            console.log(name);
+            this.$store.commit('changenavShow',false);
+            this.$router.push({path:path,params:{_name:name}})
         }
     }
 }
@@ -25,8 +36,8 @@ export default {
 @import url('../../styles/main.less');
 .topnav{
     .w(375);
-    background: rgba(51,51,51,.95);
-    // background: @h-ft-color;
+    // background: rgba(51,51,51,.95);
+    background: @h-ft-color;
     position: fixed;
     z-index: 19;
     .top(46);
@@ -34,7 +45,7 @@ export default {
     ul{
         .rgbn{
             .padding(20,20,20,20);
-            .h(85);
+            .h(55);
             button{
                 display: inline-block;
                 .h(36);

@@ -47,7 +47,7 @@ export default {
         getlist(){
             //http://huaban.com/all/?max=2124271960&limit=20&wfl=1
             //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000007&path=&_=1542288113268
-            this.$axios.get('/api/',{params:{limit:12,page:this.page}})
+            this.$axios.get('/api2/',{params:{limit:12,page:this.page}})
             .then((res)=>{
                 // console.log(111);
                 this.list=this.list.concat(res.recommends);
@@ -131,7 +131,7 @@ export default {
                 .type{
                     float: left;
                     .padding(0,10,0,10);
-                    .w(37);
+                    .w(27);
                     transform: rotate(-180deg);
                     border-left: 1px solid #fff;
                 }

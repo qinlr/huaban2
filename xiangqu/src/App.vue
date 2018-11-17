@@ -15,7 +15,18 @@ export default {
     return {
       name:1
     }
-  }
+  },
+  methods:{
+      gettitle(){
+          if(this.$route.path=='/Find'){
+              this.$store.commit('changehdtitle','发现')
+          }
+          console.log(this.$route.path);
+      }
+  },
+    updated(){
+        this.gettitle();
+    }
 }
 </script>
 
