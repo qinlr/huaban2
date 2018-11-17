@@ -11,11 +11,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/api':{
-      //   target:'http://huaban.com/',
+      // '/api2':{
+      //   target:'http://huaban.com',//目标地址
       //   changeOrigin:true,
-      //   pathRewrite:{'^/api':'/'}
+      //   pathRewrite:{'^/api2':'/'}
       // },
+      // http://www.duitang.com/
       '/api':{
         target:'http://www.duitang.com/',
         changeOrigin:true,
