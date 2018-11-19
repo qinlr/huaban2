@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state:{
-    login:window.localStorage.getItem('login')?window.localStorage.getItem('login'):false,
+    list_id:window.localStorage.getItem('login')?window.localStorage.getItem('login'):false,
     sliderShow:false
   },
   mutations:{

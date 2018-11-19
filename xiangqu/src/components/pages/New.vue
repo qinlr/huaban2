@@ -40,7 +40,7 @@ Vue.use(InfiniteScroll);
 export default {
     name:'New',
     components:{dropdown},
-    props:['url'],
+    props:['url','id'],
     data(){
         return {
             films:[],
