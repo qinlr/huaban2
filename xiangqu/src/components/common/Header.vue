@@ -57,6 +57,7 @@ export default {
             
             
         },
+        
         changenav(){
             this.navshow=this.$store.state.navShow;
             if(this.navshow){
@@ -72,15 +73,37 @@ export default {
             this.changenav();
         },
         gettitle(){
-          if(this.$route.path=='/Find'){
-              this.$store.commit('changehdtitle','发现')
-          }
-          if(this.$route.path=='/New'){
-              this.$store.commit('changehdtitle','最新')
-          }
-          if(this.$route.path=='/Hot'){
-              this.$store.commit('changehdtitle','热门')
-          }
+            var path=this.$route.path;
+            switch (path) {
+                case '/Find':
+                    this.$store.commit('changehdtitle','发现')
+                    break;
+                    case ('/New'||'/new'):
+                    this.$store.commit('changehdtitle','最新')
+                    break;
+                    case ('/Hot'||'/hot'):
+                    this.$store.commit('changehdtitle','热门')
+                    break;
+                    case '/Reg':
+                    this.$store.commit('changehdtitle','注册')
+                    break;
+                    case '/Login':
+                    this.$store.commit('changehdtitle','登录')
+                    break;
+                    case '/Search':
+                    var search=this.$store.state.search;
+                    this.$store.commit('changehdtitle',search)
+                    break;
+            }
+        //   if(this.$route.path=='/Find'){
+        //       this.$store.commit('changehdtitle','发现')
+        //   }
+        //   if(this.$route.path=='/New'){
+        //       this.$store.commit('changehdtitle','最新')
+        //   }
+        //   if(this.$route.path=='/Hot'){
+        //       this.$store.commit('changehdtitle','热门')
+        //   }
           console.log(this.$route.path);
       }
     },
@@ -100,11 +123,6 @@ export default {
     position: fixed;
     z-index: 10;
 }
-// .nav{
-// position: fixed;
-//     z-index: 9;
-//     .top(46);
-// }
 
 .header{
     position: fixed;

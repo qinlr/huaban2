@@ -10,14 +10,14 @@
         <div class="findbottom">
             <div class="title">为您推荐</div>
             <ul class="clearfix">
-                  <li v-for="(item,index) in list" :key="index" :class="((index+1)%4==1||(index+1)%4==0)?'bigimg':'smallimg'">
-                    <img :src="`http://hbimg.b0.upaiyun.com/${item.cover.key}`" alt="">
+                  <li v-for="(item,index) in list" :key="index" :class="((index+1)%4==1||(index+1)%4==0)?'bigimg':'smallimg'" @click="showtype(index,item2)">
+                    <img :src="'https://images.weserv.nl/?url='+item.photo.path" alt="">
                     <div class="img-bottom">
                         <div class="info">
-                            <p class="info-title">吃货福利</p>
-                            <p class="info-bottom">423采集 2133粉丝</p>
+                            <p class="info-title">{{item.album.name}}</p>
+                            <p class="info-bottom">{{item.album.like_count}}采集 {{item.album.favorite_count}}粉丝</p>
                         </div>
-                        <p class="type">画板</p>
+                        <p class="type" v-for="(item2,idx) in typelist" :key="idx" v-if="index%2==idx">{{item2}}</p>
                     </div>
                 </li> 
             </ul>
@@ -40,18 +40,26 @@ export default {
             {name:'包装设计',bgimg:'http://hbimg.b0.upaiyun.com/61ba7888d49cb049c3709a4b90eea02808bb7bfd13412-HrhqoM_sq236bl4'},
             {name:'手机菜单界面',bgimg:'http://hbimg.b0.upaiyun.com/459508e4fbbbfdf489b5879c95c07537d72913132a1c9-bLFkVN_sq236bl4'}],
             list:[],
-            page:2
+            typelist:['画板','兴趣'],
+            page:2,
+            limit:12
         }
     },
     methods:{
+        showtype(index){
+            console.log('index:'+index);
+            var type=document.querySelectorAll('.type')[index].innerHTML;
+            console.log('type:'+type);
+            this.$router.push('/Drawing')
+        },
         getlist(){
-            //http://huaban.com/all/?max=2124271960&limit=20&wfl=1
-            //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000007&path=&_=1542288113268
-            this.$axios.get('/api2/',{params:{limit:12,page:this.page}})
+            //http://www.shijue.me/community/search?type=json&page=1&size=20&license=-1&orderby=recommendTime
+            // this.$axios.get('/api2/',{params:{limit:12,page:this.page}})
+            this.$axios.get('api1/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit='+this.limit+'&cate_key=540ebb4b586df58a30d1174a&path=&_=1542973574739')
             .then((res)=>{
                 // console.log(111);
-                this.list=this.list.concat(res.recommends);
-                 this.page++;
+                this.list=this.list.concat(res.data.object_list);
+                this.limit+=12;
                 console.log(this.list)
             })
             .catch((err)=>{
@@ -99,7 +107,7 @@ export default {
     .findbottom{  
         ul{
             li{
-                .margin(0,2,0,2);
+                .margin(3,2,3,2);
                 float: left;
             }
         }
@@ -122,6 +130,7 @@ export default {
                 width: 100%;
                 height: 100%;
             }
+            
             .img-bottom{
                 .fs(18);
                 .padding(0,0,10,0);
@@ -139,7 +148,9 @@ export default {
                     float: right;
                     .padding(0,0,0,10);
                     .info-title{
+                        .w(175);
                         font-weight: 500;
+                        overflow: hidden;text-overflow: ellipsis;white-space: nowrap
                     }
                     .info-bottom{
                         .fs(14);
@@ -150,6 +161,7 @@ export default {
         .smallimg{
             .w(116);
             .h(235);
+            background: @fl-bg-color;
             img{
                 width: 100%;
                 .h(116);
@@ -157,11 +169,14 @@ export default {
             .img-bottom{
                 background: @fl-bg-color;
                 .padding(8,8,8,8);
+                // .h(132);
                 color:@fl-ft-color;
                 .fs(16);
+                .h(60);
                 .info{
                      .info-title{
                     color: @h-ft-color;
+                    
                     }
                     .info-bottom{
                         color: #999;

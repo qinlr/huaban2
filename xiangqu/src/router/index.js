@@ -7,6 +7,9 @@ import New from '../components/pages/New'
 import Hot from '../components/pages/Hot'
 import Find from '../components/pages/Find/Find'
 import Search from '../components/pages/Search/Search'
+import Drawing from '../components/pages/Find/Drawing'
+import Login from '../components/pages/My/Login'
+import Reg from '../components/pages/My/Reg'
 Vue.use(Router)
 
 export default new Router({
@@ -39,7 +42,22 @@ export default new Router({
       path:'/Search',
       name:'Search',
       component:Search
-    }
+    },
+    { 
+      path: '/Drawing',
+        name: 'Drawing',
+        component: Drawing
+      },
+      { 
+        path: '/Login',
+          name: 'Login',
+          component: Login
+        },
+      { 
+        path: '/Reg',
+          name: 'Reg',
+          component: Reg
+        }
 
   ]
 })

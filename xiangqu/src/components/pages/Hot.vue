@@ -1,7 +1,7 @@
 <template>
-    <div id="all">
+    <div id="all" >
         <dropdown></dropdown>
-        <allList :new-data="true"></allList>
+        <allList :new-data="true" :father-data="url"></allList>
         <!-- <div class="new-list" >
                 <ul  v-for="(item,index) in films" :key="index"  v-if="index%2==0">
                     <img :src="'https://images.weserv.nl/?url='+item.photo.path">
@@ -47,7 +47,9 @@ export default {
     // props:['url'],
     data(){
         return {
-            films:[]
+            films:[],
+            url:'d172705cbe10c0000006',
+            path:'1542288113268'
         }
     },
     methods:{

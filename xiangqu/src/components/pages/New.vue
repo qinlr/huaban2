@@ -2,7 +2,7 @@
                
     <div id="all">
         <dropdown></dropdown>
-        <allList :new-data="false"></allList>
+        <allList :new-data="false" :father-data="listurl"></allList>
     </div>
 </template>
 
@@ -22,7 +22,8 @@ export default {
         return {
             films:[],
             start:0,
-            limit:10
+            limit:10,
+            listurl:'d172705cbe10c0000004'
         }
     },
     computed:{

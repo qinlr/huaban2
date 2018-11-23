@@ -1,8 +1,5 @@
 import Vue from 'vue'//vue实例
 import Vuex from 'vuex' //vue router
-
-
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({

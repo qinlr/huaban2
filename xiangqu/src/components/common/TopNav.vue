@@ -1,12 +1,18 @@
 <template>
     <div class="topnav">
         <ul>
-            <li class="rgbn">
-                <button class="regbtn">注册</button>
-                <button class="loginbtn">登录</button>
+            <li class="rgbn" v-if="!Login">
+                <button v-for="(item,index) in btnlist" :key="index" :class="index?'loginbtn':'regbtn'" @click="topath(item.pathname)">{{item.name}}</button>
+                <!-- <button class="loginbtn">登录</button> -->
             </li>
-            <li v-for="(item,index) in list" :key="index" @click="topath(item.pathname,item.name)">
+            <!-- <li @click="topath(item.pathname)" v-if="Login?index>=0:index>1">
                 {{item.name}} <i class="fa fa-angle-right fr"></i>    
+            </li> -->
+            <li v-for="(item,index) in list" :key="index" @click="topath(item.pathname)">
+                {{item.name}}<i class="fa fa-angle-right fr"></i>    
+            </li>
+            <li class="exit" v-if="Login">
+                <button @click="exit">退出登录</button>
             </li>
         </ul>
     </div>
@@ -17,19 +23,43 @@ export default {
     name:'TopNav',
     data(){
         return {
-            list:[{name:'最新',pathname:'New'},{name:'热门',pathname:'Hot'},{name:'发现',pathname:'Find'}]
+            // islogin:index>1,
+            btnlist:[{name:'注册',pathname:'/Reg'},{name:'登录',pathname:'/Login'}],
+            list:[]
         }
     },
     computed:{
-        navshow(){return this.$store.state.navShow}
+        navshow(){return this.$store.state.navShow},
+        Login(){return this.$store.state.login}
     },
     methods:{
-        topath(path,name){
+        exit(){
+            window.localStorage.removeItem('login');
+            location.reload();
+        },
+        getlist(){
+            var login=this.$store.state.login;
+            console.log(login);
+            console.log(321124);
+            if(login){
+                this.list=[{name:login,pathname:'/New'},{name:'我的关注',pathname:'/New'},{name:'最新',pathname:'/New'},{name:'热门',pathname:'/Hot'},{name:'发现',pathname:'/Find'}]
+            }else{
+                this.list=[{name:'最新',pathname:'/New'},{name:'热门',pathname:'/Hot'},{name:'发现',pathname:'/Find'}]
+            }
+        },
+        topath(path,item){
             console.log(name);
             this.$store.commit('changenavShow',false);
-            this.$router.push({path:path,params:{_name:name}})
-        }
+            this.$router.push({path:path})
+        },
+        my(){ }
+    },
+    created(){
+        this.getlist();
     }
+    // mounted(){
+    //     this.getlist();
+    // }
 }
 </script>
 <style lang="less" scoped>
@@ -69,7 +99,20 @@ export default {
                 .margin(0,0,0,7);
             }
         }
-        //li
+        .exit{
+            .h(70);
+            .lh(70);
+            button{
+                .w(335);
+                .h(40);
+                text-align: center;
+                .lh(40);
+                color:#fff;
+                background:linear-gradient( #E53E49, #D43636);
+                border: 1px solid #C90000;
+                .fs(16);
+            }
+        }
         li{
             border-bottom:1px solid #3B3B3B; 
             // border-shadow:0 1px 1px #363636 inset; 
