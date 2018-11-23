@@ -1,7 +1,6 @@
 <template>
     <div id="app">
         <div class="contain">
-            <!-- {{list}} -->
             <div class="imgs"><img src="../../../static/imgs/m2.jpg"></div>
             <div class="caozuo">
                 <div class="gongneng">
@@ -71,9 +70,9 @@ import Vue from 'vue';
 import {InfiniteScroll} from 'mint-ui';
 
 export default {
-    name:'List',
+    name:'Details',
     components:{},
-    props:['url'],
+    props:['id','films'],
     data(){
         return {
             list:[],
@@ -88,20 +87,19 @@ export default {
         }
     },
     methods:{
-        loadMore() {
-            this.getData();
-        },
+        // loadMore() {
+        //     this.getData();
+        
+        // },
         getData(){
         //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000007&path=&_=1542288113268
-
-            this.$axios.get('/api/napi/blog/list/by_category/',{params:{start:this.start,include_fields:'sender%2Calbum%2Clike_count%2Cmsg',limit:this.limit,cate_key:'5017d172705cbe10c0000007',path:'',_:1542288113268}})
+            this.$axios.get('/api/napi/blog/list/by_category/'+this.id,{params:{start:this.start,include_fields:'sender%2Calbum%2Clike_count%2Cmsg',limit:this.limit,cate_key:'5017d172705cbe10c0000007',path:'',_:1542288113268}})
             .then((res)=>{
                 this.films=this.films.concat(res.data.object_list);
                 this.start+=this.limit;
-                // this.toast.close()
                 console.log(this.start)
                 console.log(res.data)
-                // console.log(this.films)
+                console.log(this.films)
             })
             .catch((err)=>{
                 // this.toast.close()

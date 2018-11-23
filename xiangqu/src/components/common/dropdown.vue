@@ -36,6 +36,7 @@ export default {
 .dd{
     background: #fff;
     width: 100%;
+    .padding(46,0,0,0);
     div{
         p{
             background: #fafafa;
@@ -45,7 +46,7 @@ export default {
             .lh(44);
             border-bottom: 1px solid #ededed;
             position: relative;
-            z-index: 1000;
+            z-index: 9;
             i{
                float: right;
                .lh(44);

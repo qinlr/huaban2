@@ -11,16 +11,21 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/api2':{
-      //   target:'http://huaban.com',//目标地址
-      //   changeOrigin:true,
-      //   pathRewrite:{'^/api2':'/'}
-      // },
+      '/api2':{
+        target:'http://huaban.com',//目标地址
+        changeOrigin:true,
+        pathRewrite:{'^/api2':'/'}
+      },
       // http://www.duitang.com/
-      '/api':{
+      '/api1':{
         target:'http://www.duitang.com/',
         changeOrigin:true,
-        pathRewrite:{'^/api':'/'}
+        pathRewrite:{'^/api1':'/'}
+      },
+      '/api3':{
+        target:'http://shijue.me',
+        changeOrigin:true,
+        pathRewrite:{'^/api3':'/'}
       }
     },
 

@@ -6,6 +6,7 @@ import Vue from 'vue'
 import App from './App'
 
 import router from './router/index.js'
+import store from './store/index.js'
 
 //引入axios
 import Axios from 'axios'
@@ -23,7 +24,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  router,store,
   components: { App },
   template: '<App/>'
 })

@@ -3,15 +3,15 @@
         <div class="header">
         <div class="left fl" v-show="!Show">
             <a href=""><img src="../../../static/imgs/huaban_logo.png" alt=""></a>
-            <div class="left-title fr">发现</div>
+            <div class="left-title fr">{{hdtitle}}</div>
         </div>
         <form class="fl">
             <a class="close"  v-show="Show" @click="Show=false"><i class="fa fa-times"></i></a>
-            <input type="text" v-model="search"  v-show="Show">
-            <a class="search"  v-show="true" @click="Show=!Show"><i class="fa fa-search"></i></a>
+            <input type="text" v-model="search"  v-show="Show" @keyup.enter="clSearch">
+            <a class="search"  v-show="true" @click="clSearch"><i class="fa fa-search"></i></a>
 
         </form>
-        <div class="right fr" @click="change">
+        <div class="right fr" @click="change" :style="{background:rbg}">
             <i :class="icon"></i>
         </div>
     </div>
@@ -29,6 +29,9 @@
 </template>
 <script>
 import TopNav from './TopNav';
+import Info from './Info';
+import TasteNav from './TasteNav';
+import Vue from 'vue';
 export default {
     name:'Header',
     data(){
@@ -36,20 +39,60 @@ export default {
             name:'这里是header',
             search:'',
             Show:false,
-            navShow:false,
-            icon:'fa fa-bars'
+            icon:'fa fa-bars',
+            rbg:"#fff"
         }
     },
-    components:{TopNav},
+    computed:{
+        hdtitle(){return this.$store.state.headertitle},
+        navShow(){return this.$store.state.navShow}
+    },
+    components:{TopNav,Info,TasteNav},
     methods:{
-        change(){
-            this.navShow=!this.navShow
-            if(this.navShow){
-                this.icon='fa fa-times'
-            }else{
-                this.icon='fa fa-bars'
+        clSearch(){
+            if(this.Show&&this.search){
+                this.$store.commit('changeSearch',this.search)
+                console.log('跳转了')
+                this.$router.push({path:'/Search',params:{val:this.search}});
             }
-        }
+            this.Show=!this.Show;
+            
+            
+        },
+        changenav(){
+            this.navshow=this.$store.state.navShow;
+            if(this.navshow){
+                this.icon='fa fa-times';
+                this.rbg='#f5f5f5';
+            }else{
+                this.icon='fa fa-bars';
+                this.rbg="#fff";
+            }
+        },
+        change(){
+            this.$store.commit('changenavShow',!this.navshow);
+            this.changenav();
+        },
+        gettitle(){
+          if(this.$route.path=='/Find'){
+              this.$store.commit('changehdtitle','发现')
+          }
+          if(this.$route.path=='/New'){
+              this.$store.commit('changehdtitle','最新')
+          }
+          if(this.$route.path=='/Hot'){
+              this.$store.commit('changehdtitle','热门')
+          }
+          console.log(this.$route.path);
+      }
+    },
+    created(){
+        this.gettitle();
+    },
+    updated(){
+        this.gettitle();
+        this.changenav();
+        // this.clSearch();
     }
 }
 </script>

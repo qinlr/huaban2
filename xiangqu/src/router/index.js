@@ -6,7 +6,9 @@ import Home from '@/components/Home'
 import New from '../components/pages/New'
 import Hot from '../components/pages/Hot'
 import Find from '../components/pages/Find/Find'
-import List from '../components/pages/List'
+import Details from '../components/pages/Details'
+import Search from '../components/pages/Search/Search'
+// import TasteNav from '../components/common/TasteNav'
 Vue.use(Router)
 
 Vue.config.productionTip = false
@@ -28,21 +30,31 @@ export default new Router({
       component: Home
     },
     {
-      path:'/new',
+      path:'/New',
       name:'New',
       component:New
     },
     {
-      path:'/hot',
+      path:'/Hot',
       name:'Hot',
       component:Hot
     },
     {
-      path:'/list/:id',
-      name:'List',
-      component:List,
+      path:'/details/:id',
+      name:'Details',
+      component:Details,
       props:true
+    },
+    {
+      path:'/Search',
+      name:'Search',
+      component:Search
     }
+    // {
+    //   path:'/tastenav',
+    //   name:'TasteNav',
+    //   component:TasteNav
+    // }
 
   ]
 })
