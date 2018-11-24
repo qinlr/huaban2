@@ -29,6 +29,8 @@
 </template>
 <script>
 import TopNav from './TopNav';
+import Info from './Info';
+import TasteNav from './TasteNav';
 import Vue from 'vue';
 export default {
     name:'Header',
@@ -45,7 +47,7 @@ export default {
         hdtitle(){return this.$store.state.headertitle},
         navShow(){return this.$store.state.navShow}
     },
-    components:{TopNav},
+    components:{TopNav,Info,TasteNav},
     methods:{
         clSearch(){
             if(this.Show&&this.search){

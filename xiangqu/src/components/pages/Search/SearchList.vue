@@ -54,7 +54,11 @@ export default {
     props:['new-data'],
     methods:{
         loadMore(){
-            this.getData()
+            this.loading = true;
+            setTimeout(() => {
+                this.getData();
+                this.loading = false;
+            }, 2500);
         },
         getData(){
             //http://shijue.me/community/search?search=works&key=%E5%AE%A0%E7%89%A9&type=json&page=1&size=20&license=-1&orderby=rating

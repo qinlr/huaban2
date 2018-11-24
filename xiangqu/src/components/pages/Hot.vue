@@ -44,7 +44,7 @@ Vue.use(InfiniteScroll);
 export default {
     name:'Hot',
     components:{dropdown,allList},
-    // props:['url'],
+    props:['id','films'],
     data(){
         return {
             films:[],
@@ -53,17 +53,6 @@ export default {
         }
     },
     methods:{
-        // loadMore(){
-        //     this.getData();
-        //     this.loading = true;
-        //     setTimeout(() => {
-        //         let last = this.films[this.films.length - 1];
-        //         for (let i = 1; i <= 4; i++) {
-        //         this.films.push(last + i);
-        //         }
-        //         this.loading = false;
-        //     }, 2500);
-        // },
         
         getData(){
             //http://huaban.com/all/?max=2124278561&limit=20&wfl=1
@@ -78,7 +67,6 @@ export default {
             .catch((err)=>{
                 console.log(err)
             })
-            // this.films=['../../../static/imgs/m1.jpg','../../../static/imgs/m2.jpg','../../../static/imgs/m3.jpg','../../../static/imgs/m4.jpg','../../../static/imgs/m5.jpg','../../../static/imgs/m6.jpg','../../../static/imgs/m7.jpg','../../../static/imgs/m1.jpg','../../../static/imgs/m2.jpg','../../../static/imgs/m3.jpg','../../../static/imgs/m4.jpg','../../../static/imgs/m5.jpg','../../../static/imgs/m6.jpg','../../../static/imgs/m7.jpg']
         }
     },
     created(){

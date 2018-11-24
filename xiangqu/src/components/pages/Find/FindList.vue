@@ -10,7 +10,7 @@
         <div class="findbottom">
             <div class="title">为您推荐</div>
             <ul class="clearfix">
-                  <li v-for="(item,index) in list" :key="index" :class="((index+1)%4==1||(index+1)%4==0)?'bigimg':'smallimg'" @click="showtype(index,item2)">
+                  <li v-for="(item,index) in list" :key="index" :class="((index+1)%4==1||(index+1)%4==0)?'bigimg':'smallimg'" @click="showtype(index,item)">
                     <img :src="'https://images.weserv.nl/?url='+item.photo.path" alt="">
                     <div class="img-bottom">
                         <div class="info">
@@ -46,11 +46,17 @@ export default {
         }
     },
     methods:{
-        showtype(index){
+        showtype(index,item){
             console.log('index:'+index);
             var type=document.querySelectorAll('.type')[index].innerHTML;
             console.log('type:'+type);
-            this.$router.push('/Drawing')
+            if(type=='画板'){
+                this.$router.push({name:'TasteNav',params:{ite:item}})
+            }
+            if(type=='兴趣'){
+                this.$router.push({name:'Interest',params:{ite:item}})
+            }
+            // this.$router.push('/Drawing')
         },
         getlist(){
             //http://www.shijue.me/community/search?type=json&page=1&size=20&license=-1&orderby=recommendTime

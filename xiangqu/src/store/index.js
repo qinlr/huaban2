@@ -4,6 +4,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state:{
+    list_id:window.localStorage.getItem('login')?window.localStorage.getItem('login'):false,
+    sliderShow:false,
     login:window.localStorage.getItem('login')?window.localStorage.getItem('login'):false,
     sliderShow:false,
     headertitle:'发现',

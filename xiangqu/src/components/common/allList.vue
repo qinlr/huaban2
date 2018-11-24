@@ -56,13 +56,18 @@ export default {
     props:['newData','fatherData'],
     methods:{
         loadMore(){
-            this.getData()
+             this.loading = true;
+            setTimeout(() => {
+                this.getData();
+                this.loading = false;
+            }, 2500);
+            
         },
         getData(){
             //http://huaban.com/all/?max=2124278561&limit=20&wfl=1
 //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000007&path=&_=1542288113268
 //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000006&path=&_=1542974371864
-//https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000004&path=&_=1542974686858
+//https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000004&path=&_=1542974686858 d172705cbe10c0000006
             this.$axios.get('/api1/napi/blog/list/by_category/',{params:{start:0,include_fields:'sender%2Calbum%2Clike_count%2Cmsg',limit:this.limit,cate_key:'5017'+this.fatherData,path:'',_:1542288113268}})
             // this.$axios.get('api1/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017'+cate+'&path=&_='+this.path)
             .then((res)=>{
