@@ -64,11 +64,6 @@ export default {
                 var top2=storage.getItem('infotop');
                 this.top=JSON.parse(top2);
             }
-            // var caiji=this.top.favorite_count;
-            // var guanz=this.top.album.favorite_count;
-            console.log(this.top);
-            // this.list=[caiji+'采集','被'+guanz+'人关注'];
-            // console.log(this.list)
         }
     },
     created(){

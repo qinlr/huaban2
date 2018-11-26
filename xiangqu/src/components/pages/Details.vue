@@ -1,20 +1,21 @@
 <template>
+<div class="a1">
     <div id="app">
         <div class="contain">
-            <div class="imgs"><img src="../../../static/imgs/m2.jpg"></div>
+            <div class="imgs"><img :src="'https://images.weserv.nl/?url='+this.item.photo.path"></div>
             <div class="caozuo">
                 <div class="gongneng">
-                    <li><i class="fa fa-star"></i>1<span>收藏</span></li>
-                    <li><i class="fa fa-heart"></i>2<span>更多</span></li>
+                    <li><i class="fa fa-star"></i>{{this.item.favorite_count}}<span>收藏</span></li>
+                    <li><i class="fa fa-heart"></i>{{this.item.favorite_count}}<span>更多</span></li>
                     <li class="li3"><i class="fa fa-ellipsis-h"></i>更多</li>
                 </div>
             </div>
-            <div class="num">ad12sfad3fdsgd45hfhf6789</div>
+            <div class="num">{{this.item.msg}}</div>
             <div class="info">
-                <img src="../../../static/imgs/m1.jpg">
+                <img :src="'https://images.weserv.nl/?url='+this.item.photo.path">
                 <ul>
-                    <li>某某资料空间</li>
-                    <li>于<span>16分钟</span>之前采集</li>
+                    <li>{{this.item.msg}}</li>
+                    <li>于<span>{{this.item.add_datetime}}</span>之前采集</li>
                 </ul>
             </div>
         </div>
@@ -38,94 +39,84 @@
         </div>
         <div class="entry">
             <h3>为你推荐的采集</h3>
-            <div class="list" v-infinite-scroll="loadMore"
-                infinite-scroll-disabled="loading"
-                infinite-scroll-distance="10">
-                 <ul  v-for="(item,index) in films" :key="index" v-if="index%2==0">
-                    <img :src="'https://images.weserv.nl/?url='+item.photo.path">
-                        <li class="li1">{{item.msg}}</li>
-                    <li><img :src="'https://images.weserv.nl/?url='+item.photo.path">
-                        <p><span>{{item.id}}</span><br><span>{{item.sender_id}}</span></p>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="list" v-infinite-scroll="loadMore"
-                infinite-scroll-disabled="loading"
-                infinite-scroll-distance="10">
-                 <ul  v-for="(item,index) in films" :key="index" v-if="index%2==1">
-                    <img :src="'https://images.weserv.nl/?url='+item.photo.path">
-                        <li class="li1">{{item.msg}}</li>
-                    <li><img :src="'https://images.weserv.nl/?url='+item.photo.path">
-                        <p><span>{{item.id}}</span><br><span>{{item.sender_id}}</span></p>
-                    </li>
-                </ul>
-            </div>
         </div>
+        
     </div>
+    <allList :new-data="false" :father-data="listurl"></allList>
+</div>
 </template>
 
 <script>
 import Vue from 'vue';
 import {InfiniteScroll} from 'mint-ui';
+import allList from '../common/allList';
 
 export default {
     name:'Details',
-    components:{},
-    props:['id','films'],
+    components:{allList},
+    // props:['id','films'],
     data(){
         return {
-            list:[],
-            films:[],
+            item:{},
             start:1,
-            limit:10
+            limit:10,
+            listurl:'5017d172705cbe10c0000004'
         }
     },
-     computed:{
-        store(){
-            // return this.$store.state.login;
-        }
-    },
+    //  computed:{
+    //     store(){
+    //         // return this.$store.state.login;
+    //     }
+    // },
     methods:{
-        // loadMore() {
-        //     this.getData();
+        loadMore() {
+            this.getData();
         
+        },
+        // getData(){
+        //     this.item=this.$router.history.current.params.ite;
+        //     console.log(this.item)
+        //     console.log(this.item.photo.path)
         // },
         getData(){
-        //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000007&path=&_=1542288113268
-            this.$axios.get('/api/napi/blog/list/by_category/'+this.id,{params:{start:this.start,include_fields:'sender%2Calbum%2Clike_count%2Cmsg',limit:this.limit,cate_key:'5017d172705cbe10c0000007',path:'',_:1542288113268}})
-            .then((res)=>{
-                this.films=this.films.concat(res.data.object_list);
-                this.start+=this.limit;
-                console.log(this.start)
-                console.log(res.data)
-                console.log(this.films)
-            })
-            .catch((err)=>{
-                // this.toast.close()
-                console.log(err)
-            })
-
+            console.log('这里是兴趣')
+            var storage=window.localStorage;
+            var ite=this.$router.history.current.params.ite;
+            if(ite){
+                this.item=ite;
+                var data=JSON.stringify(ite);
+                storage.setItem('detop',data);
+                
+            }else{
+                var top2=storage.getItem('detop');
+                this.item=JSON.parse(top2);
+            }
         }
     },
     created(){
-        this.getData()
+        this.getData();
+        console.log(767)
+        // console.log(this.$router.history.current.params.ite)
     }
 }
 
 </script>
 <style lang="less" scoped>
 @import url('../../styles/main.less');
+// .a1{.h(1100);}
 #app{
     position: relative;
     .top(47);
     .left(0);
+    .h(738);
     .contain{
         border-bottom: 1px solid #ddd;
         .imgs{
             width:100%;
+            .h(375);
             img{
                 width: 100%;
+                height: 100%;
             }
         }
         .caozuo{
@@ -137,7 +128,7 @@ export default {
                     position: relative;
                     .bdradius(2);
                     background: #fafafa;
-                    .fs(15);
+                    .fs(12);
                     text-align: center;
                     .lh(30);
                     .h(30);

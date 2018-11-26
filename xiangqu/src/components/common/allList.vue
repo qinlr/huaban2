@@ -5,7 +5,7 @@
             infinite-scroll-distance="10">
         <!-- {{fatherData}} -->
         <div class="new-list" >
-                <ul  v-for="(item,index) in films" :key="index"  v-if="index%2==0">
+                <ul  v-for="(item,index) in films" :key="index"  v-if="index%2==0" @click="goDetails(item)">
                     <img :src="'https://images.weserv.nl/?url='+item.photo.path">
                      <li class="li1">{{item.msg}}
                          <p v-if="newData">
@@ -20,7 +20,7 @@
                 </ul>
         </div>
          <div class="new-list" >
-                <ul  v-for="(item,index) in films" :key="index"  v-if="index%2==1">
+                <ul  v-for="(item,index) in films" :key="index"  v-if="index%2==1" @click="goDetails(item)">
                     <img :src="'https://images.weserv.nl/?url='+item.photo.path">
                      <li class="li1">{{item.msg}}
                          <p v-if="newData">
@@ -79,6 +79,11 @@ export default {
                 console.log(err)
             })
             // this.films=['../../../static/imgs/m1.jpg','../../../static/imgs/m2.jpg','../../../static/imgs/m3.jpg','../../../static/imgs/m4.jpg','../../../static/imgs/m5.jpg','../../../static/imgs/m6.jpg','../../../static/imgs/m7.jpg','../../../static/imgs/m1.jpg','../../../static/imgs/m2.jpg','../../../static/imgs/m3.jpg','../../../static/imgs/m4.jpg','../../../static/imgs/m5.jpg','../../../static/imgs/m6.jpg','../../../static/imgs/m7.jpg']
+        },
+        goDetails(item){
+            // var path=this.$route.path;
+            this.$router.push({name:'Details',params:{ite:item}})
+            
         }
     },
     created(){
@@ -88,8 +93,6 @@ export default {
     updated(){
          this.getData();
     }
-
-    
 }
 </script>
 <style lang="less" scoped>
