@@ -48,7 +48,7 @@ export default {
     data(){
         return {
             films:[],
-            url:'d172705cbe10c0000006',
+            url:'5017d172705cbe10c0000006',
             path:'1542288113268'
         }
     },

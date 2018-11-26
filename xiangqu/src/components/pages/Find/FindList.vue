@@ -17,7 +17,8 @@
                             <p class="info-title">{{item.album.name}}</p>
                             <p class="info-bottom">{{item.album.like_count}}采集 {{item.album.favorite_count}}粉丝</p>
                         </div>
-                        <p class="type" v-for="(item2,idx) in typelist" :key="idx" v-if="index%2==idx">{{item2}}</p>
+                        <p class="type">{{(item.album.like_count&&item.album.favorite_count)?'画板':'兴趣'}}</p>
+                        <!-- <p class="type" v-for="(item2,idx) in typelist" :key="idx" v-if="index%2==idx">{{item2}}</p> -->
                     </div>
                 </li> 
             </ul>
@@ -51,7 +52,7 @@ export default {
             var type=document.querySelectorAll('.type')[index].innerHTML;
             console.log('type:'+type);
             if(type=='画板'){
-                this.$router.push({name:'TasteNav',params:{ite:item}})
+                this.$router.push({name:'Drawing',params:{ite:item}})
             }
             if(type=='兴趣'){
                 this.$router.push({name:'Interest',params:{ite:item}})

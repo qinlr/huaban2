@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <!-- <div> -->
         <div class="taste">
         <div class="header">
             <div class="hleft">
@@ -16,12 +16,12 @@
         </div>
         <div class="nav">
             <ul >
-                <li v-for="(item,index) in list" :key="index" :class="sel===item?'sel':''">{{item}}</li>
+                <li v-for="(item,index) in list" :key="index" @click="changesel(index)" :class="sel===index?'sel':''">{{item}}</li>
             </ul>
         </div>
     </div>
-    <allList :new-data="true" :father-data="url"></allList>
-    </div>
+    <!-- <allList :new-data="true" :father-data="url"></allList>
+    </div> -->
 </template>
 <script>
 // import Vue from 'vue'
@@ -35,12 +35,23 @@ export default {
         return{
             // name:'TasteNav',
             list:[],
-            sel:'491采集',
-            url:'d172705cbe10c0000006',
+            sel:0,
+            url:'5017d172705cbe10c0000006',
             top:{}
         }
     },
+    props:['test'],
     methods:{
+        changesel(index){
+            this.sel=index;
+            if(index){
+                this.url='5017d172705cbe10c0000006';
+            }else{
+                this.url='501f666a194f991ccfd28a24'
+            }
+            this.test(this.url);
+            
+        },
         getinfo(){
             console.log('这里是画板')
             var storage=window.localStorage;
@@ -72,7 +83,7 @@ export default {
 .taste{
     position: relative;
     .top(46);
-    .h(150);
+    .h(160);
     .header{
         .h(70);
         width:100%;

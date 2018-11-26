@@ -1,7 +1,9 @@
 <template>
     <div class="Drawing">
-        <TasteNav :falist='this.$router.history.current.params.id'></TasteNav>
-        <allList :new-data="true" :father-data="url"></allList>
+         <!-- :falist='this.$router.history.current.params.id' -->
+        <TasteNav :test="sonurl"></TasteNav>
+        <!-- {{url}} -->
+        <allList :new-data="true" :father-data="url" :shuaxin="getlist"></allList>
     </div>
 </template>
 <script>
@@ -13,7 +15,9 @@ export default {
     components:{TasteNav,allList},
     data(){
         return {
-            url:'d172705cbe10c0000006',
+            // url:''
+            url:'501f666a194f991ccfd28a24',
+            // getlist:''
             // list:{}        
         }
     },
@@ -23,6 +27,10 @@ export default {
         }
     },
     methods:{
+        getlist(getList){getList();},
+        sonurl(surl){
+            this.url=surl;
+        },
         getinfo(){
             console.log('这里是画板')
             this.list=this.$router.history.current.params.ite;

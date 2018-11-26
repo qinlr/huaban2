@@ -96,6 +96,15 @@ export default {
                     var search=this.$store.state.search;
                     this.$store.commit('changehdtitle',search)
                     break;
+                    case '/Drawing':
+                    this.$store.commit('changehdtitle','画板')
+                    break;
+                    case '/Interest':
+                    this.$store.commit('changehdtitle','兴趣')
+                    break;
+                    // case '/Interest':
+                    // this.$store.commit('changehdtitle','兴趣')
+                    // break;
             }
         //   if(this.$route.path=='/Find'){
         //       this.$store.commit('changehdtitle','发现')

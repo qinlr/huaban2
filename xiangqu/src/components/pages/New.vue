@@ -23,7 +23,7 @@ export default {
             films:[],
             start:0,
             limit:10,
-            listurl:'d172705cbe10c0000004'
+            listurl:'5017d172705cbe10c0000004'
         }
     },
     computed:{

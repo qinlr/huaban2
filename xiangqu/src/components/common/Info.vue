@@ -2,10 +2,10 @@
     <div class="info">
         <div class="contain">
             <div class="banner">
-                <img src="../../../static/imgs/3.jpg" alt="">
+                <img :src="'https://images.weserv.nl/?url='+this.top.photo.path" alt="">
                 <div class="txt">
                     
-                    <h2>三明治</h2>
+                    <h2>{{this.top.msg}}</h2>
                     <p>你中有我我中有你，这不就是三明治吗？</p>
                     <button>关注</button>
                     <div>
@@ -46,7 +46,7 @@ export default {
     data(){
         return {
             name:'我是info',
-             url:'d172705cbe10c0000006',
+             url:'5017d172705cbe10c0000006',
              top:{}
         }
     },
@@ -58,10 +58,10 @@ export default {
             if(ite){
                 this.top=ite;
                 var data=JSON.stringify(ite);
-                storage.setItem('top1',data);
+                storage.setItem('infotop',data);
                 
             }else{
-                var top2=storage.getItem('top1');
+                var top2=storage.getItem('infotop');
                 this.top=JSON.parse(top2);
             }
             // var caiji=this.top.favorite_count;
@@ -108,6 +108,10 @@ export default {
                 h2{
                     color: #fff;
                     .fs(18);
+                    .w(200);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                     .padding(15,0,0,0);
                 }
                 p{

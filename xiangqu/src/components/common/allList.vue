@@ -3,7 +3,7 @@
              v-infinite-scroll="loadMore"
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10">
-        <!-- <dropdown></dropdown> -->
+        <!-- {{fatherData}} -->
         <div class="new-list" >
                 <ul  v-for="(item,index) in films" :key="index"  v-if="index%2==0">
                     <img :src="'https://images.weserv.nl/?url='+item.photo.path">
@@ -53,7 +53,7 @@ export default {
             limit:10
         }
     },
-    props:['newData','fatherData'],
+    props:['newData','fatherData','shuaxin'],
     methods:{
         loadMore(){
              this.loading = true;
@@ -61,6 +61,7 @@ export default {
                 this.getData();
                 this.loading = false;
             }, 2500);
+            // console.log(this.fatherData);
             
         },
         getData(){
@@ -68,8 +69,8 @@ export default {
 //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000007&path=&_=1542288113268
 //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000006&path=&_=1542974371864
 //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000004&path=&_=1542974686858 d172705cbe10c0000006
-            this.$axios.get('/api1/napi/blog/list/by_category/',{params:{start:0,include_fields:'sender%2Calbum%2Clike_count%2Cmsg',limit:this.limit,cate_key:'5017'+this.fatherData,path:'',_:1542288113268}})
-            // this.$axios.get('api1/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017'+cate+'&path=&_='+this.path)
+            // this.$axios.get('/api1/napi/blog/list/by_category/',{params:{start:0,include_fields:'sender%2Calbum%2Clike_count%2Cmsg',limit:this.limit,cate_key:this.fatherData,path:'',_:1542288113268}})
+            this.$axios.get('api1/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key='+this.fatherData+'&path=&_=1542974371864')
             .then((res)=>{
                 this.films=this.films.concat(res.data.object_list);
                 this.limit+=(this.limit)*1
@@ -81,7 +82,11 @@ export default {
         }
     },
     created(){
-        this.getData()
+        this.getData();
+        
+    },
+    updated(){
+         this.getData();
     }
 
     
