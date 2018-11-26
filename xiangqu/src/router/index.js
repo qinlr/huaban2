@@ -44,7 +44,7 @@ export default new Router({
       component:Hot
     },
     {
-      path:'/details/:id',
+      path:'/details',
       name:'Details',
       component:Details,
       props:true
