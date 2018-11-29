@@ -10,7 +10,7 @@
             <input type="password" placeholder="密码" v-model="password">
             <input type="button" value="登录" @click="Login">
         </div>
-        <div class="reg">还没有花瓣账号？<a>立即注册</a></div>
+        <div class="reg">还没有花瓣账号？<a @click="toreg">立即注册</a></div>
     </div>
 </template>
 <script>
@@ -24,14 +24,19 @@ export default {
         }
     },
     methods:{
+        toreg(){
+            this.$router.push('/Reg')
+            location.reload();
+        },
         Login(){
             var storage=window.localStorage;
             var psw=storage.getItem(this.username);
             if(psw){
                 if(psw==this.password){
                     window.localStorage.setItem('login',this.username);
-                    location.reload();
+                    // this.toreg();
                     this.$router.push('/Find')
+                    location.reload();
                 }else{
                     alert('密码错误！！');
                     this.password='';
@@ -40,6 +45,7 @@ export default {
                 var r=confirm('该用户不存在，是否前往注册?');
                 if(r){
                     this.$router.push('/Reg');
+                    location.reload();
                 }else{
                     this.username='';
                     this.password='';

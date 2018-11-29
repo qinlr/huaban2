@@ -10,7 +10,7 @@
             <input type="password" v-model="password" placeholder="密码">
             <input type="button" value="注册" @click="Reg">
         </div>
-        <div class="reg">还没有花瓣账号？<a>立即登录</a></div>
+        <div class="reg">还没有花瓣账号？<a @click="tologin">立即登录</a></div>
     </div>
 </template>
 <script>
@@ -28,7 +28,13 @@ export default {
             var storage=window.localStorage;
             storage.setItem(this.username,this.password);
             alert('注册成功，请前往登录');
+            this.tologin();
+            // this.$router.push('/Login');
+            // location.reload();
+        },
+        tologin(){
             this.$router.push('/Login');
+            location.reload();
         }
     }
 }
