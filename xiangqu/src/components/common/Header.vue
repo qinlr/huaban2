@@ -52,8 +52,9 @@ export default {
         clSearch(){
             if(this.Show&&this.search){
                 this.$store.commit('changeSearch',this.search)
-                console.log('跳转了')
-                this.$router.push({path:'/Search',params:{val:this.search}});
+                // console.log('跳转了')
+                this.search='';
+                this.$router.push({path:'/Search'});
             }
             this.Show=!this.Show;
             

@@ -79,7 +79,7 @@ export default {
         //     console.log(this.item.photo.path)
         // },
         getData(){
-            console.log('这里是兴趣')
+            // console.log('这里是兴趣')
             var storage=window.localStorage;
             var ite=this.$router.history.current.params.ite;
             if(ite){
@@ -95,7 +95,7 @@ export default {
     },
     created(){
         this.getData();
-        console.log(767)
+        // console.log(767)
         // console.log(this.$router.history.current.params.ite)
     }
 }

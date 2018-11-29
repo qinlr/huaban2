@@ -53,7 +53,7 @@ export default {
             
         },
         getinfo(){
-            console.log('这里是画板')
+            // console.log('这里是画板')
             var storage=window.localStorage;
             var ite=this.$router.history.current.params.ite;
             if(ite){

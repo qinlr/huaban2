@@ -30,8 +30,7 @@ export default {
             if(psw){
                 if(psw==this.password){
                     window.localStorage.setItem('login',this.username);
-                    // alert('登录成功');
-                    // this.$store.commit('changeLogin',this.username)
+                    location.reload();
                     this.$router.push('/Find')
                 }else{
                     alert('密码错误！！');

@@ -52,7 +52,7 @@ export default {
     },
       methods:{
         getinfo(){
-            console.log('这里是兴趣')
+            // console.log('这里是兴趣')
             var storage=window.localStorage;
             var ite=this.$router.history.current.params.ite;
             if(ite){

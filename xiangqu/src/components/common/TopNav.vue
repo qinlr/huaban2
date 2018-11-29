@@ -30,8 +30,17 @@ export default {
     },
     computed:{
         navshow(){return this.$store.state.navShow},
-        Login(){return this.$store.state.login}
+        Login(){return this.$store.state.login},
     },
+    // watch: {
+    // 　　  Login(newValue, oldValue) {　
+    //     console.log('newValue:'+newValue)　　
+    //         if(newValue!=oldValue){
+    //             console.log(newValue)
+    //         }
+    // 　　}
+
+    // },
     methods:{
         exit(){
             window.localStorage.removeItem('login');
@@ -39,8 +48,8 @@ export default {
         },
         getlist(){
             var login=this.$store.state.login;
-            console.log(login);
-            console.log(321124);
+            // console.log(login);
+            // console.log(321124);
             if(login){
                 this.list=[{name:login,pathname:'/New'},{name:'我的关注',pathname:'/New'},{name:'最新',pathname:'/New'},{name:'热门',pathname:'/Hot'},{name:'发现',pathname:'/Find'}]
             }else{
@@ -48,7 +57,7 @@ export default {
             }
         },
         topath(path,item){
-            console.log(name);
+            // console.log(name);
             this.$store.commit('changenavShow',false);
             this.$router.push({path:path})
         },
@@ -57,9 +66,6 @@ export default {
     created(){
         this.getlist();
     }
-    // mounted(){
-    //     this.getlist();
-    // }
 }
 </script>
 <style lang="less" scoped>

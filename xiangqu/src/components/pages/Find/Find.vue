@@ -12,7 +12,10 @@ export default {
             name:'这里是find'
        }
     },
-    components:{FindList}
+    components:{FindList},
+    created(){
+        // location.reload();
+    }
 }
 </script>
 <style lang="less" scoped>

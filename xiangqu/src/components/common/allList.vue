@@ -3,7 +3,6 @@
              v-infinite-scroll="loadMore"
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10">
-        <!-- {{fatherData}} -->
         <div class="new-list" >
                 <ul  v-for="(item,index) in films" :key="index"  v-if="index%2==0" @click="goDetails(item)">
                     <img :src="'https://images.weserv.nl/?url='+item.photo.path">
@@ -50,10 +49,25 @@ export default {
     data(){
         return {
             films:[],
-            limit:10
+            limit:10,
+            key:this.fatherData
         }
     },
     props:['newData','fatherData','shuaxin'],
+    computed: {
+　　pokerHistory() {
+　　　　return this.fatherData
+　　}
+    },
+    watch: {
+    　　  pokerHistory(newValue, oldValue) {　　　
+            if(newValue!=oldValue){
+                this.films=[]
+                this.getData();
+            }
+    　　}
+
+    },
     methods:{
         loadMore(){
              this.loading = true;
@@ -64,7 +78,7 @@ export default {
             // console.log(this.fatherData);
             
         },
-        getData(){
+        getData(fatherData){
             //http://huaban.com/all/?max=2124278561&limit=20&wfl=1
 //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000007&path=&_=1542288113268
 //https://www.duitang.com/napi/blog/list/by_category/?start=0&include_fields=sender%2Calbum%2Clike_count%2Cmsg&limit=24&cate_key=5017d172705cbe10c0000006&path=&_=1542974371864
@@ -90,9 +104,9 @@ export default {
         this.getData();
         
     },
-    updated(){
-         this.getData();
-    }
+    // updated(){
+    //      this.getData();
+    // }
 }
 </script>
 <style lang="less" scoped>

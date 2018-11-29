@@ -1,9 +1,9 @@
 <template>
+
     <div id="all"
              v-infinite-scroll="loadMore"
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10">
-        <!-- <dropdown></dropdown> -->
         <div class="new-list" >
                 <ul  v-for="(item,index) in slist" :key="index"  v-if="index%2==0">
                     <img :src="'https://images.weserv.nl/?url='+item.album.covers[0]">
@@ -48,10 +48,25 @@ export default {
     data(){
         return {
             slist:[],
-            page:1
+            page:1,
+            key:this.$store.state.search
         }
     },
     props:['new-data'],
+     computed: {
+　　pokerHistory() {
+　　　　return this.$store.state.search
+　　}
+    },
+    watch: {
+    　　  pokerHistory(newValue, oldValue) {　　　
+            if(newValue!=oldValue){
+                this.slist=[]
+                this.getData();
+            }
+    　　}
+
+    },
     methods:{
         loadMore(){
             this.loading = true;
@@ -67,9 +82,6 @@ export default {
             this.$axios.get('api1/napi/blog/list/by_search/?kw='+this.$store.state.search+'&type=feed&include_fields=top_comments%2Cis_root%2Csource_link%2Citem%2Cbuyable%2Croot_id%2Cstatus%2Clike_count%2Clike_id%2Csender%2Calbum%2Creply_count%2Cfavorite_blog_id&_type=&start=24&_=1542964278389')
             .then((res)=>{
                 this.slist=this.slist.concat(res.data.object_list);
-                // this.page++;
-                console.log(this.slist)
-                console.log(this.$store.state.search)
             })
             .catch((err)=>{
                 console.log(err)
